@@ -6,24 +6,37 @@
 //
 
 import AppKit
+import Cocoa
+import FlutterMacOS
 
-class StatusBarController {
+class StatusBarController : PopOverAPI {
     private var statusBar: NSStatusBar
     private var statusItem: NSStatusItem
     private var popover: NSPopover
     
-    init(_ popover: NSPopover) {
+    init(_ popover: NSPopover, flutterEngine: FlutterEngine) {
         self.popover = popover
         statusBar = NSStatusBar.init()
-        statusItem = statusBar.statusItem(withLength: 28.0)
-        
+        statusItem = statusBar.statusItem(withLength: 50.0)
+        PopOverAPISetup.setUp(binaryMessenger: flutterEngine.binaryMessenger, api: self)
+  
         if let statusBarButton = statusItem.button {
-            statusBarButton.image = #imageLiteral(resourceName: "AppIcon")
-            statusBarButton.image?.size = NSSize(width: 18.0, height: 18.0)
-            statusBarButton.image?.isTemplate = true
+            let flutterView = StatusBarFlutterView(flutterEngine: flutterEngine)
+            statusBarButton.addSubview(flutterView)
+            flutterView.frame = statusBarButton.bounds
+            flutterView.autoresizingMask = [.width, .height]
+            
+            statusBarButton.title = "     "
             statusBarButton.action = #selector(togglePopover(sender:))
             statusBarButton.target = self
         }
+    }
+    
+    func togglePopOver() throws -> Bool  {
+        if let statusBarButton = statusItem.button {
+            togglePopover(sender: statusBarButton)
+        }
+        return true
     }
     
     @objc func togglePopover(sender: AnyObject) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_mate/app/menu_bar_icon.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:focus_mate/app/app.dart';
 import 'package:focus_mate/app/common/services/package_info_service.dart';
@@ -17,6 +18,21 @@ Future<void> main() async {
         packageInfoProvider.overrideWithValue(packageInfo),
       ],
       child: const MainApp(),
+    ),
+  );
+}
+
+@pragma('vm:entry-point')
+void menuBarButtonIconWindow() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final sharedPreferences = await SharedPreferences.getInstance();
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        sharedPerferencesServiceProvider.overrideWithValue(sharedPreferences),
+      ],
+      child: const MenuBarApp(),
     ),
   );
 }
