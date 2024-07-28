@@ -22,6 +22,20 @@ class AppDelegate: FlutterAppDelegate {
         popover.contentViewController = controller
         statusBar = StatusBarController.init(popover,flutterEngine: flutterEngine)
         mainFlutterWindow?.close()
+        setupMessageChannels()
         super.applicationDidFinishLaunching(aNotification)
+    }
+    
+    func setupMessageChannels() {
+        let menuBarChannelName = "com.pinnaclelabs/menu_bar_state"
+        let controller: FlutterViewController = mainFlutterWindow?.contentViewController as! FlutterViewController
+        
+        let menuBarStateChannel =
+        FlutterBasicMessageChannel(name: menuBarChannelName, binaryMessenger: flutterEngine.binaryMessenger, codec: FlutterStandardMessageCodec.sharedInstance())
+        FlutterBasicMessageChannel(name: menuBarChannelName, binaryMessenger: controller.engine.binaryMessenger, codec: FlutterStandardMessageCodec.sharedInstance()).setMessageHandler{
+            (message: Any?, reply: FlutterReply) -> Void in
+            menuBarStateChannel.sendMessage(message)
+            reply(true)
+        }
     }
 }

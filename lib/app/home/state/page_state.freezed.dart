@@ -16,7 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomePageState {
-  int get counter => throw _privateConstructorUsedError;
+  Duration get runningDuration => throw _privateConstructorUsedError;
+  bool get running => throw _privateConstructorUsedError;
+  DurationType get durationType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomePageStateCopyWith<HomePageState> get copyWith =>
@@ -29,7 +31,8 @@ abstract class $HomePageStateCopyWith<$Res> {
           HomePageState value, $Res Function(HomePageState) then) =
       _$HomePageStateCopyWithImpl<$Res, HomePageState>;
   @useResult
-  $Res call({int counter});
+  $Res call(
+      {Duration runningDuration, bool running, DurationType durationType});
 }
 
 /// @nodoc
@@ -45,13 +48,23 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? runningDuration = null,
+    Object? running = null,
+    Object? durationType = null,
   }) {
     return _then(_value.copyWith(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      runningDuration: null == runningDuration
+          ? _value.runningDuration
+          : runningDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      running: null == running
+          ? _value.running
+          : running // ignore: cast_nullable_to_non_nullable
+              as bool,
+      durationType: null == durationType
+          ? _value.durationType
+          : durationType // ignore: cast_nullable_to_non_nullable
+              as DurationType,
     ) as $Val);
   }
 }
@@ -64,7 +77,8 @@ abstract class _$$HomePageStateImplCopyWith<$Res>
       __$$HomePageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int counter});
+  $Res call(
+      {Duration runningDuration, bool running, DurationType durationType});
 }
 
 /// @nodoc
@@ -78,13 +92,23 @@ class __$$HomePageStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? counter = null,
+    Object? runningDuration = null,
+    Object? running = null,
+    Object? durationType = null,
   }) {
     return _then(_$HomePageStateImpl(
-      counter: null == counter
-          ? _value.counter
-          : counter // ignore: cast_nullable_to_non_nullable
-              as int,
+      runningDuration: null == runningDuration
+          ? _value.runningDuration
+          : runningDuration // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      running: null == running
+          ? _value.running
+          : running // ignore: cast_nullable_to_non_nullable
+              as bool,
+      durationType: null == durationType
+          ? _value.durationType
+          : durationType // ignore: cast_nullable_to_non_nullable
+              as DurationType,
     ));
   }
 }
@@ -92,14 +116,21 @@ class __$$HomePageStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomePageStateImpl implements _HomePageState {
-  const _$HomePageStateImpl({required this.counter});
+  const _$HomePageStateImpl(
+      {required this.runningDuration,
+      required this.running,
+      required this.durationType});
 
   @override
-  final int counter;
+  final Duration runningDuration;
+  @override
+  final bool running;
+  @override
+  final DurationType durationType;
 
   @override
   String toString() {
-    return 'HomePageState(counter: $counter)';
+    return 'HomePageState(runningDuration: $runningDuration, running: $running, durationType: $durationType)';
   }
 
   @override
@@ -107,11 +138,16 @@ class _$HomePageStateImpl implements _HomePageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomePageStateImpl &&
-            (identical(other.counter, counter) || other.counter == counter));
+            (identical(other.runningDuration, runningDuration) ||
+                other.runningDuration == runningDuration) &&
+            (identical(other.running, running) || other.running == running) &&
+            (identical(other.durationType, durationType) ||
+                other.durationType == durationType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, counter);
+  int get hashCode =>
+      Object.hash(runtimeType, runningDuration, running, durationType);
 
   @JsonKey(ignore: true)
   @override
@@ -121,11 +157,17 @@ class _$HomePageStateImpl implements _HomePageState {
 }
 
 abstract class _HomePageState implements HomePageState {
-  const factory _HomePageState({required final int counter}) =
-      _$HomePageStateImpl;
+  const factory _HomePageState(
+      {required final Duration runningDuration,
+      required final bool running,
+      required final DurationType durationType}) = _$HomePageStateImpl;
 
   @override
-  int get counter;
+  Duration get runningDuration;
+  @override
+  bool get running;
+  @override
+  DurationType get durationType;
   @override
   @JsonKey(ignore: true)
   _$$HomePageStateImplCopyWith<_$HomePageStateImpl> get copyWith =>

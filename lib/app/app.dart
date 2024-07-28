@@ -21,6 +21,7 @@ class MainApp extends ConsumerWidget {
         scheme: FlexScheme.blueM3,
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       themeMode: ref.watch(themeModeNotifierProvider),
       routerConfig: ref.watch(navigatorProvider),
       builder: (context, child) {

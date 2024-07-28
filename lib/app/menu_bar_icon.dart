@@ -2,7 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:focus_mate/app/common/notifiers/theme_mode_notifier.dart';
-import 'package:focus_mate/app/pigeon/popover.dart';
+import 'package:focus_mate/app/menu_bar_icon/presentation/menu_bar_view.dart';
 
 class MenuBarApp extends ConsumerWidget {
   const MenuBarApp({super.key});
@@ -20,20 +20,7 @@ class MenuBarApp extends ConsumerWidget {
       ),
       debugShowCheckedModeBanner: false,
       themeMode: ref.watch(themeModeNotifierProvider),
-      home: Material(
-        type: MaterialType.transparency,
-        child: Center(
-          child: InkWell(
-            onTap: () {
-              PopOverAPI().togglePopOver();
-            },
-            child: Icon(
-              Icons.center_focus_strong,
-              color: Colors.green[400],
-            ),
-          ),
-        ),
-      ),
+      home: const MenuBarView(),
     );
   }
 }
