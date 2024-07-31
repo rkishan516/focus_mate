@@ -6,7 +6,7 @@ part of 'menu_bar_view_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$menuBarNotifierHash() => r'61db619751fe33aad0321704a16a95180692a0ab';
+String _$menuBarNotifierHash() => r'e0119075e3fda0a3f1d18eaf5a2d108fb341fc07';
 
 /// See also [MenuBarNotifier].
 @ProviderFor(MenuBarNotifier)

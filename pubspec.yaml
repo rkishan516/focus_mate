@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.0.3 <4.0.0'
 
 dependencies:
+  duration_picker: ^1.2.0
   equatable: ^2.0.5
   flex_color_scheme: ^7.3.1
   flutter:

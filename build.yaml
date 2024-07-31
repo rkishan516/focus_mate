@@ -16,6 +16,7 @@ targets:
         generate_for:
           include:
             - lib/app/*/notifiers/*.dart
+            - lib/app/*/repository/*.dart
             - lib/app/*/services/*.dart
             - lib/app/routes/**/*.dart
       

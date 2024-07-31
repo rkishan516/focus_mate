@@ -16,6 +16,13 @@ RouteBase get $homePageRoute => GoRouteData.$route(
       path: '/',
       name: 'home',
       factory: $HomePageRouteExtension._fromState,
+      routes: [
+        GoRouteData.$route(
+          path: 'settings',
+          name: 'settings',
+          factory: $SettingsPageRouteExtension._fromState,
+        ),
+      ],
     );
 
 extension $HomePageRouteExtension on HomePageRoute {
@@ -23,6 +30,24 @@ extension $HomePageRouteExtension on HomePageRoute {
 
   String get location => GoRouteData.$location(
         '/',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SettingsPageRouteExtension on SettingsPageRoute {
+  static SettingsPageRoute _fromState(GoRouterState state) =>
+      const SettingsPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/settings',
       );
 
   void go(BuildContext context) => context.go(location);

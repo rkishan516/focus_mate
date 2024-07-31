@@ -15,6 +15,8 @@ class MenuBarNotifier extends _$MenuBarNotifier {
       state = state.copyWith(duration: (message as int).seconds);
       return true;
     });
-    return MenuBarViewState(duration: 25.minutes);
+    return MenuBarViewState(
+      duration: 25.minutes,
+    );
   }
 }

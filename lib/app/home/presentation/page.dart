@@ -1,6 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:focus_mate/app/home/notifiers/page_notifier.dart';
+import 'package:focus_mate/app/home/state/page_state.dart';
+import 'package:focus_mate/app/routes/notifiers/app_router.dart';
+import 'package:focus_mate/app/settings/notifiers/settings_view_notifier.dart';
 import 'package:supercharged/supercharged.dart';
 
 class HomePage extends ConsumerWidget {
@@ -12,6 +17,16 @@ class HomePage extends ConsumerWidget {
     final notifier = ref.watch(homePageNotifierProvider.notifier);
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              const SettingsPageRoute().go(context);
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -40,7 +55,20 @@ class HomePage extends ConsumerWidget {
                 ),
                 alignment: Alignment.centerLeft,
                 child: FractionallySizedBox(
-                  widthFactor: (homePageState.runningDuration / 25.minutes),
+                  widthFactor: min(
+                      1,
+                      (homePageState.runningDuration /
+                          switch (homePageState.durationType) {
+                            DurationType.focus => ref.watch(
+                                settingsNotifierProvider
+                                    .select((value) => value.focusDuration)),
+                            DurationType.rest => ref.watch(
+                                settingsNotifierProvider
+                                    .select((value) => value.restDuration)),
+                            DurationType.longRest => ref.watch(
+                                settingsNotifierProvider
+                                    .select((value) => value.longRestDuration)),
+                          })),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor,

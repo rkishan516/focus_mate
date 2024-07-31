@@ -27,7 +27,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
           padding: const EdgeInsets.symmetric(horizontal: 25.0),
           child: Center(
             child: Text(
-              'Hello, Dolphin!',
+              'Hello, Mate!',
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),

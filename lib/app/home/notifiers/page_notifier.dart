@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:focus_mate/app/settings/notifiers/settings_view_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:focus_mate/app/home/state/page_state.dart';
 import 'package:supercharged/supercharged.dart';
@@ -10,7 +11,9 @@ part 'page_notifier.g.dart';
 @riverpod
 class HomePageNotifier extends _$HomePageNotifier {
   static const BasicMessageChannel _menuBarStateChannel = BasicMessageChannel(
-      'com.pinnaclelabs/menu_bar_state', StandardMessageCodec());
+    'com.pinnaclelabs/menu_bar_state',
+    StandardMessageCodec(),
+  );
   Timer? _timer;
 
   @override
@@ -22,7 +25,7 @@ class HomePageNotifier extends _$HomePageNotifier {
       _timer?.cancel();
     });
     return HomePageState(
-      runningDuration: 25.minutes,
+      runningDuration: ref.read(settingsNotifierProvider).focusDuration,
       running: false,
       durationType: DurationType.focus,
     );
@@ -31,9 +34,19 @@ class HomePageNotifier extends _$HomePageNotifier {
   void resetCurrentTimer() {
     stopTimer();
     state = state.copyWith(
-      runningDuration:
-          state.durationType == DurationType.rest ? 5.minutes : 25.minutes,
+      durationType: DurationType.focus,
+      running: false,
+      runningDuration: ref.read(settingsNotifierProvider).focusDuration,
     );
+  }
+
+  Duration maxDuration() {
+    return switch (state.durationType) {
+      DurationType.focus => ref.read(settingsNotifierProvider).focusDuration,
+      DurationType.rest => ref.read(settingsNotifierProvider).restDuration,
+      DurationType.longRest =>
+        ref.read(settingsNotifierProvider).longRestDuration,
+    };
   }
 
   void startTimer() {
@@ -43,6 +56,9 @@ class HomePageNotifier extends _$HomePageNotifier {
       if (state.runningDuration <= 0.seconds) {
         _stopTimerOnComplete();
         return;
+      }
+      if (state.runningDuration > maxDuration()) {
+        state = state.copyWith(runningDuration: maxDuration());
       }
       state = state.copyWith(
         runningDuration: state.runningDuration - 1.seconds,
@@ -55,11 +71,20 @@ class HomePageNotifier extends _$HomePageNotifier {
     _timer?.cancel();
     state = state.copyWith(
       running: false,
-      durationType: state.durationType == DurationType.focus
-          ? DurationType.rest
-          : DurationType.focus,
-      runningDuration:
-          state.durationType == DurationType.focus ? 5.minutes : 25.minutes,
+      durationType: switch (state.durationType) {
+        DurationType.focus =>
+          state.currentFocus == 4 ? DurationType.longRest : DurationType.rest,
+        DurationType.rest => DurationType.focus,
+        DurationType.longRest => DurationType.focus,
+      },
+      currentFocus: switch (state.durationType) {
+        DurationType.focus => state.currentFocus,
+        DurationType.rest => state.currentFocus + 1,
+        DurationType.longRest => 0,
+      },
+      runningDuration: state.durationType == DurationType.focus
+          ? ref.read(settingsNotifierProvider).restDuration
+          : ref.read(settingsNotifierProvider).focusDuration,
     );
   }
 

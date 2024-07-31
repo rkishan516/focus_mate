@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomePageState {
+  int get currentFocus => throw _privateConstructorUsedError;
   Duration get runningDuration => throw _privateConstructorUsedError;
   bool get running => throw _privateConstructorUsedError;
   DurationType get durationType => throw _privateConstructorUsedError;
@@ -32,7 +33,10 @@ abstract class $HomePageStateCopyWith<$Res> {
       _$HomePageStateCopyWithImpl<$Res, HomePageState>;
   @useResult
   $Res call(
-      {Duration runningDuration, bool running, DurationType durationType});
+      {int currentFocus,
+      Duration runningDuration,
+      bool running,
+      DurationType durationType});
 }
 
 /// @nodoc
@@ -48,11 +52,16 @@ class _$HomePageStateCopyWithImpl<$Res, $Val extends HomePageState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? currentFocus = null,
     Object? runningDuration = null,
     Object? running = null,
     Object? durationType = null,
   }) {
     return _then(_value.copyWith(
+      currentFocus: null == currentFocus
+          ? _value.currentFocus
+          : currentFocus // ignore: cast_nullable_to_non_nullable
+              as int,
       runningDuration: null == runningDuration
           ? _value.runningDuration
           : runningDuration // ignore: cast_nullable_to_non_nullable
@@ -78,7 +87,10 @@ abstract class _$$HomePageStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Duration runningDuration, bool running, DurationType durationType});
+      {int currentFocus,
+      Duration runningDuration,
+      bool running,
+      DurationType durationType});
 }
 
 /// @nodoc
@@ -92,11 +104,16 @@ class __$$HomePageStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? currentFocus = null,
     Object? runningDuration = null,
     Object? running = null,
     Object? durationType = null,
   }) {
     return _then(_$HomePageStateImpl(
+      currentFocus: null == currentFocus
+          ? _value.currentFocus
+          : currentFocus // ignore: cast_nullable_to_non_nullable
+              as int,
       runningDuration: null == runningDuration
           ? _value.runningDuration
           : runningDuration // ignore: cast_nullable_to_non_nullable
@@ -117,10 +134,14 @@ class __$$HomePageStateImplCopyWithImpl<$Res>
 
 class _$HomePageStateImpl implements _HomePageState {
   const _$HomePageStateImpl(
-      {required this.runningDuration,
+      {this.currentFocus = 1,
+      required this.runningDuration,
       required this.running,
       required this.durationType});
 
+  @override
+  @JsonKey()
+  final int currentFocus;
   @override
   final Duration runningDuration;
   @override
@@ -130,7 +151,7 @@ class _$HomePageStateImpl implements _HomePageState {
 
   @override
   String toString() {
-    return 'HomePageState(runningDuration: $runningDuration, running: $running, durationType: $durationType)';
+    return 'HomePageState(currentFocus: $currentFocus, runningDuration: $runningDuration, running: $running, durationType: $durationType)';
   }
 
   @override
@@ -138,6 +159,8 @@ class _$HomePageStateImpl implements _HomePageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomePageStateImpl &&
+            (identical(other.currentFocus, currentFocus) ||
+                other.currentFocus == currentFocus) &&
             (identical(other.runningDuration, runningDuration) ||
                 other.runningDuration == runningDuration) &&
             (identical(other.running, running) || other.running == running) &&
@@ -146,8 +169,8 @@ class _$HomePageStateImpl implements _HomePageState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, runningDuration, running, durationType);
+  int get hashCode => Object.hash(
+      runtimeType, currentFocus, runningDuration, running, durationType);
 
   @JsonKey(ignore: true)
   @override
@@ -158,10 +181,13 @@ class _$HomePageStateImpl implements _HomePageState {
 
 abstract class _HomePageState implements HomePageState {
   const factory _HomePageState(
-      {required final Duration runningDuration,
+      {final int currentFocus,
+      required final Duration runningDuration,
       required final bool running,
       required final DurationType durationType}) = _$HomePageStateImpl;
 
+  @override
+  int get currentFocus;
   @override
   Duration get runningDuration;
   @override
