@@ -13,11 +13,13 @@ class StatusBarController : PopOverAPI {
     private var statusBar: NSStatusBar
     private var statusItem: NSStatusItem
     private var popover: NSPopover
+    private var menuBarAction: MenuBarActions
     
-    init(_ popover: NSPopover, flutterEngine: FlutterEngine) {
+    init(_ popover: NSPopover, flutterEngine: FlutterEngine, mainEngine: FlutterEngine) {
         self.popover = popover
         statusBar = NSStatusBar.init()
         statusItem = statusBar.statusItem(withLength: 50.0)
+        menuBarAction = MenuBarActions(binaryMessenger: mainEngine.binaryMessenger)
         PopOverAPISetup.setUp(binaryMessenger: flutterEngine.binaryMessenger, api: self)
   
         if let statusBarButton = statusItem.button {
@@ -35,6 +37,13 @@ class StatusBarController : PopOverAPI {
     func togglePopOver() throws -> Bool  {
         if let statusBarButton = statusItem.button {
             togglePopover(sender: statusBarButton)
+        }
+        return true
+    }
+    
+    func toggleRunningTimer() throws -> Bool {
+        menuBarAction.toggleRunningTimer { completion in
+            
         }
         return true
     }

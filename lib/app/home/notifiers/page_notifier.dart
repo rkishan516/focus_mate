@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:focus_mate/app/pigeon/popover.dart';
 import 'package:focus_mate/app/settings/notifiers/settings_view_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:focus_mate/app/home/state/page_state.dart';
@@ -9,7 +10,7 @@ import 'package:supercharged/supercharged.dart';
 part 'page_notifier.g.dart';
 
 @riverpod
-class HomePageNotifier extends _$HomePageNotifier {
+class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
   static const BasicMessageChannel _menuBarStateChannel = BasicMessageChannel(
     'com.pinnaclelabs/menu_bar_state',
     StandardMessageCodec(),
@@ -18,6 +19,7 @@ class HomePageNotifier extends _$HomePageNotifier {
 
   @override
   HomePageState build() {
+    MenuBarActions.setUp(this);
     ref.listenSelf((prev, next) {
       _menuBarStateChannel.send(next.runningDuration.inSeconds);
     });
@@ -91,5 +93,14 @@ class HomePageNotifier extends _$HomePageNotifier {
   void stopTimer() {
     _timer?.cancel();
     state = state.copyWith(running: false);
+  }
+
+  @override
+  void toggleRunningTimer() {
+    if (state.running) {
+      stopTimer();
+    } else {
+      startTimer();
+    }
   }
 }

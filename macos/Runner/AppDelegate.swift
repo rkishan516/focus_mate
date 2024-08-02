@@ -20,7 +20,7 @@ class AppDelegate: FlutterAppDelegate {
         let controller: FlutterViewController = mainFlutterWindow?.contentViewController as! FlutterViewController
         popover.contentSize = NSSize(width: 520, height: 400)
         popover.contentViewController = controller
-        statusBar = StatusBarController.init(popover,flutterEngine: flutterEngine)
+        statusBar = StatusBarController.init(popover,flutterEngine: flutterEngine, mainEngine: controller.engine)
         mainFlutterWindow?.close()
         setupMessageChannels()
         super.applicationDidFinishLaunching(aNotification)

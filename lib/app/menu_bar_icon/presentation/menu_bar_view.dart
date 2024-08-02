@@ -20,6 +20,9 @@ class MenuBarView extends ConsumerWidget {
           onTap: () {
             PopOverAPI().togglePopOver();
           },
+          onSecondaryTap: () {
+            PopOverAPI().toggleRunningTimer();
+          },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: Builder(builder: (context) {
