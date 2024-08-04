@@ -1,6 +1,6 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:focus_mate/app/theme/default.dart';
 import 'package:go_router/go_router.dart';
 import 'package:focus_mate/app/common/notifiers/theme_mode_notifier.dart';
 import 'package:focus_mate/app/routes/notifiers/app_router.dart';
@@ -13,14 +13,8 @@ class MainApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      theme: FlexThemeData.light(
-        scheme: FlexScheme.blueM3,
-        useMaterial3: true,
-      ),
-      darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.blueM3,
-        useMaterial3: true,
-      ),
+      theme: DefaultTheme.light,
+      darkTheme: DefaultTheme.dark,
       debugShowCheckedModeBanner: false,
       themeMode: ref.watch(themeModeNotifierProvider),
       routerConfig: ref.watch(navigatorProvider),
@@ -42,6 +36,11 @@ class _VersionOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Get current brightness (light or dark) to determine the background color
+    final brightness = Theme.of(context).brightness;
+    final backgroundColor =
+        brightness == Brightness.dark ? Colors.white : Colors.black;
+
     return Stack(
       children: [
         child,
@@ -64,20 +63,26 @@ class _VersionOverlay extends ConsumerWidget {
                       router.pushNamed(DeveloperMenuPageRoute.name);
                     }
                   },
-                  child: const Padding(
-                    padding: EdgeInsets.only(left: 5, bottom: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5, bottom: 10),
                     child: RotatedBox(
                       quarterTurns: 1,
                       child: ColoredBox(
-                        color: Colors.black,
+                        color: backgroundColor,
                         child: Padding(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 5,
                             vertical: 1,
                           ),
                           child: Text(
                             'Dev',
-                            style: TextStyle(fontSize: 11),
+                            style:
+                                Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: brightness == Brightness.dark
+                                          ? Colors.black
+                                          : Colors.white,
+                                    ),
                           ),
                         ),
                       ),

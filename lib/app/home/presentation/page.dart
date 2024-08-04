@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:focus_mate/app/common/notifiers/theme_mode_notifier.dart';
 import 'package:focus_mate/app/home/notifiers/page_notifier.dart';
 import 'package:focus_mate/app/home/state/page_state.dart';
 import 'package:focus_mate/app/routes/notifiers/app_router.dart';
@@ -23,18 +24,20 @@ class HomePage extends ConsumerWidget {
           onTap: () {
             exit(0);
           },
-          child: const Icon(
+          child: Icon(
             Icons.cancel,
-            color: Colors.white54,
+            color: Theme.of(context).disabledColor,
           ),
         ),
         actions: [
+          const _ThemeSwitcher(),
           IconButton(
             onPressed: () {
               const SettingsPageRoute().go(context);
             },
             icon: const Icon(Icons.settings),
           ),
+          const SizedBox(width: 15),
         ],
       ),
       body: SafeArea(
@@ -47,7 +50,7 @@ class HomePage extends ConsumerWidget {
                 homePageState.durationType == DurationType.focus
                     ? 'Focus Mate'
                     : 'Rest Time Mate',
-                style: Theme.of(context).textTheme.titleLarge,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 10),
               Builder(builder: (context) {
@@ -107,6 +110,59 @@ class HomePage extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _ThemeSwitcher extends ConsumerWidget {
+  const _ThemeSwitcher();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Transform.scale(
+      scale: 0.85,
+      child: Switch.adaptive(
+        activeColor: Colors.white,
+        inactiveTrackColor: Colors.black,
+        thumbColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return Colors.white;
+            }
+
+            if (states.contains(WidgetState.selected)) {
+              return Colors.black;
+            }
+
+            return null;
+          },
+        ),
+        thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.disabled)) {
+              return _getIcon(context, false);
+            }
+            if (states.contains(WidgetState.selected)) {
+              return _getIcon(context, true);
+            }
+
+            return _getIcon(context, false);
+          },
+        ),
+        value: ref.watch(themeModeNotifierProvider) == ThemeMode.dark,
+        onChanged: (dark) {
+          ref
+              .read(themeModeNotifierProvider.notifier)
+              .updateThemeMode(dark ? ThemeMode.dark : ThemeMode.light);
+        },
+      ),
+    );
+  }
+
+  Icon _getIcon(BuildContext context, bool dark) {
+    return Icon(
+      dark ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
+      color: Theme.of(context).iconTheme.color,
     );
   }
 }
