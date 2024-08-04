@@ -11,6 +11,7 @@ class DefaultTheme {
     // Add any other customizations (which cannot be set in the FlexThemeData.dark constructor) here
     return flexTheme.copyWith(
       dividerColor: Colors.grey[800],
+      iconTheme: const IconThemeData(color: Colors.white),
     );
   }
 
@@ -23,6 +24,7 @@ class DefaultTheme {
     // Add any other customizations (which cannot be set in the FlexThemeData.light constructor) here
     return flexTheme.copyWith(
       dividerColor: Colors.grey[300],
+      iconTheme: const IconThemeData(color: Colors.black),
     );
   }
 }
