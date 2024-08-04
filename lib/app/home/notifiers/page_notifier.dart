@@ -56,7 +56,7 @@ class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
     state = state.copyWith(running: true);
     _timer = Timer.periodic(1.seconds, (timer) {
       if (state.runningDuration <= 0.seconds) {
-        _stopTimerOnComplete();
+        _timerOnComplete();
         return;
       }
       if (state.runningDuration > maxDuration()) {
@@ -69,8 +69,10 @@ class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
     });
   }
 
-  void _stopTimerOnComplete() {
+  void _timerOnComplete() {
     _timer?.cancel();
+    final settings = ref.read(settingsNotifierProvider);
+
     state = state.copyWith(
       running: false,
       durationType: switch (state.durationType) {
@@ -85,9 +87,17 @@ class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
         DurationType.longRest => 0,
       },
       runningDuration: state.durationType == DurationType.focus
-          ? ref.read(settingsNotifierProvider).restDuration
-          : ref.read(settingsNotifierProvider).focusDuration,
+          ? settings.restDuration
+          : settings.focusDuration,
     );
+    bool autoStartTimer = state.durationType == DurationType.focus &&
+        settings.automaticallyStartFocus;
+    autoStartTimer = autoStartTimer ||
+        state.durationType == DurationType.rest &&
+            settings.automaticallyStartRest;
+    if (autoStartTimer) {
+      startTimer();
+    }
   }
 
   void stopTimer() {

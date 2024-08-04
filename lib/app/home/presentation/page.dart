@@ -34,7 +34,9 @@ class HomePage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Focus Mate',
+                homePageState.durationType == DurationType.focus
+                    ? 'Focus Mate'
+                    : 'Rest Time Mate',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 10),

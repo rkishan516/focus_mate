@@ -8,5 +8,7 @@ class SettingsViewState with _$SettingsViewState {
     required Duration focusDuration,
     required Duration restDuration,
     required Duration longRestDuration,
+    @Default(false) bool automaticallyStartFocus,
+    @Default(false) bool automaticallyStartRest,
   }) = _SettingsViewState;
 }

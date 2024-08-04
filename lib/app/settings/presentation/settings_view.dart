@@ -14,6 +14,10 @@ class SettingsView extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        title: Text(
+          'Settings',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       body: SafeArea(
         child: Center(
@@ -26,18 +30,32 @@ class SettingsView extends ConsumerWidget {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: [
+                    SettingToggleCard(
+                      title: 'Automatically Start Focus',
+                      enabled: state.automaticallyStartFocus,
+                      onChanged: notifier.updateAutomaticallyStartFocus,
+                    ),
+                    const SizedBox(height: 8),
                     SettingDurationCard(
                       duration: state.focusDuration,
                       icon: '🧘‍♂️',
                       title: 'Focus Duration',
                       onDurationChanged: notifier.updateFocusDuration,
                     ),
+                    const SizedBox(height: 8),
+                    SettingToggleCard(
+                      title: 'Automatically Start Rest',
+                      enabled: state.automaticallyStartRest,
+                      onChanged: notifier.updateAutomaticallyStartRest,
+                    ),
+                    const SizedBox(height: 8),
                     SettingDurationCard(
                       duration: state.restDuration,
                       icon: '😴',
                       title: 'Rest Duration',
                       onDurationChanged: notifier.updateRestDuration,
                     ),
+                    const SizedBox(height: 8),
                     SettingDurationCard(
                       duration: state.longRestDuration,
                       icon: '💤',
@@ -70,7 +88,11 @@ class SettingDurationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return ListTile(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      tileColor: Theme.of(context).colorScheme.secondary,
       onTap: () async {
         final updatedDuration = await showDurationPicker(
           context: context,
@@ -79,25 +101,48 @@ class SettingDurationCard extends StatelessWidget {
         if (updatedDuration == null) return;
         onDurationChanged?.call(updatedDuration);
       },
-      child: Card(
-        color: Theme.of(context).colorScheme.secondary,
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.onSecondary,
-            child: Text(
-              icon,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-          title: Text(
-            title,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          trailing: Text(
-            '${duration.inMinutes.toString().padLeft(2, '0')}:${(duration.inSeconds.remainder(60).toString().padLeft(2, '0'))}',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+      leading: CircleAvatar(
+        backgroundColor: Theme.of(context).colorScheme.onSecondary,
+        child: Text(
+          icon,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
+      ),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+      trailing: Text(
+        '${duration.inMinutes.toString().padLeft(2, '0')}:${(duration.inSeconds.remainder(60).toString().padLeft(2, '0'))}',
+        style: Theme.of(context).textTheme.titleMedium,
+      ),
+    );
+  }
+}
+
+class SettingToggleCard extends StatelessWidget {
+  const SettingToggleCard({
+    super.key,
+    required this.enabled,
+    required this.title,
+    required this.onChanged,
+  });
+  final bool enabled;
+  final String title;
+  final Function(bool)? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile.adaptive(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      tileColor: Theme.of(context).colorScheme.secondary,
+      onChanged: onChanged,
+      value: enabled,
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.titleMedium,
       ),
     );
   }

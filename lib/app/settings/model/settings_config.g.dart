@@ -14,6 +14,9 @@ _$SettingsConfigImpl _$$SettingsConfigImplFromJson(Map<String, dynamic> json) =>
           Duration(microseconds: (json['restDuration'] as num).toInt()),
       longRestDuration:
           Duration(microseconds: (json['longRestDuration'] as num).toInt()),
+      automaticallyStartFocus:
+          json['automaticallyStartFocus'] as bool? ?? false,
+      automaticallyStartRest: json['automaticallyStartRest'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$SettingsConfigImplToJson(
@@ -22,4 +25,6 @@ Map<String, dynamic> _$$SettingsConfigImplToJson(
       'focusDuration': instance.focusDuration.inMicroseconds,
       'restDuration': instance.restDuration.inMicroseconds,
       'longRestDuration': instance.longRestDuration.inMicroseconds,
+      'automaticallyStartFocus': instance.automaticallyStartFocus,
+      'automaticallyStartRest': instance.automaticallyStartRest,
     };

@@ -23,6 +23,8 @@ mixin _$SettingsConfig {
   Duration get focusDuration => throw _privateConstructorUsedError;
   Duration get restDuration => throw _privateConstructorUsedError;
   Duration get longRestDuration => throw _privateConstructorUsedError;
+  bool get automaticallyStartFocus => throw _privateConstructorUsedError;
+  bool get automaticallyStartRest => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +41,9 @@ abstract class $SettingsConfigCopyWith<$Res> {
   $Res call(
       {Duration focusDuration,
       Duration restDuration,
-      Duration longRestDuration});
+      Duration longRestDuration,
+      bool automaticallyStartFocus,
+      bool automaticallyStartRest});
 }
 
 /// @nodoc
@@ -58,6 +62,8 @@ class _$SettingsConfigCopyWithImpl<$Res, $Val extends SettingsConfig>
     Object? focusDuration = null,
     Object? restDuration = null,
     Object? longRestDuration = null,
+    Object? automaticallyStartFocus = null,
+    Object? automaticallyStartRest = null,
   }) {
     return _then(_value.copyWith(
       focusDuration: null == focusDuration
@@ -72,6 +78,14 @@ class _$SettingsConfigCopyWithImpl<$Res, $Val extends SettingsConfig>
           ? _value.longRestDuration
           : longRestDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      automaticallyStartFocus: null == automaticallyStartFocus
+          ? _value.automaticallyStartFocus
+          : automaticallyStartFocus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      automaticallyStartRest: null == automaticallyStartRest
+          ? _value.automaticallyStartRest
+          : automaticallyStartRest // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -87,7 +101,9 @@ abstract class _$$SettingsConfigImplCopyWith<$Res>
   $Res call(
       {Duration focusDuration,
       Duration restDuration,
-      Duration longRestDuration});
+      Duration longRestDuration,
+      bool automaticallyStartFocus,
+      bool automaticallyStartRest});
 }
 
 /// @nodoc
@@ -104,6 +120,8 @@ class __$$SettingsConfigImplCopyWithImpl<$Res>
     Object? focusDuration = null,
     Object? restDuration = null,
     Object? longRestDuration = null,
+    Object? automaticallyStartFocus = null,
+    Object? automaticallyStartRest = null,
   }) {
     return _then(_$SettingsConfigImpl(
       focusDuration: null == focusDuration
@@ -118,6 +136,14 @@ class __$$SettingsConfigImplCopyWithImpl<$Res>
           ? _value.longRestDuration
           : longRestDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      automaticallyStartFocus: null == automaticallyStartFocus
+          ? _value.automaticallyStartFocus
+          : automaticallyStartFocus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      automaticallyStartRest: null == automaticallyStartRest
+          ? _value.automaticallyStartRest
+          : automaticallyStartRest // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -128,7 +154,9 @@ class _$SettingsConfigImpl implements _SettingsConfig {
   const _$SettingsConfigImpl(
       {required this.focusDuration,
       required this.restDuration,
-      required this.longRestDuration});
+      required this.longRestDuration,
+      this.automaticallyStartFocus = false,
+      this.automaticallyStartRest = false});
 
   factory _$SettingsConfigImpl.fromJson(Map<String, dynamic> json) =>
       _$$SettingsConfigImplFromJson(json);
@@ -139,10 +167,16 @@ class _$SettingsConfigImpl implements _SettingsConfig {
   final Duration restDuration;
   @override
   final Duration longRestDuration;
+  @override
+  @JsonKey()
+  final bool automaticallyStartFocus;
+  @override
+  @JsonKey()
+  final bool automaticallyStartRest;
 
   @override
   String toString() {
-    return 'SettingsConfig(focusDuration: $focusDuration, restDuration: $restDuration, longRestDuration: $longRestDuration)';
+    return 'SettingsConfig(focusDuration: $focusDuration, restDuration: $restDuration, longRestDuration: $longRestDuration, automaticallyStartFocus: $automaticallyStartFocus, automaticallyStartRest: $automaticallyStartRest)';
   }
 
   @override
@@ -155,13 +189,18 @@ class _$SettingsConfigImpl implements _SettingsConfig {
             (identical(other.restDuration, restDuration) ||
                 other.restDuration == restDuration) &&
             (identical(other.longRestDuration, longRestDuration) ||
-                other.longRestDuration == longRestDuration));
+                other.longRestDuration == longRestDuration) &&
+            (identical(
+                    other.automaticallyStartFocus, automaticallyStartFocus) ||
+                other.automaticallyStartFocus == automaticallyStartFocus) &&
+            (identical(other.automaticallyStartRest, automaticallyStartRest) ||
+                other.automaticallyStartRest == automaticallyStartRest));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, focusDuration, restDuration, longRestDuration);
+  int get hashCode => Object.hash(runtimeType, focusDuration, restDuration,
+      longRestDuration, automaticallyStartFocus, automaticallyStartRest);
 
   @JsonKey(ignore: true)
   @override
@@ -182,7 +221,9 @@ abstract class _SettingsConfig implements SettingsConfig {
   const factory _SettingsConfig(
       {required final Duration focusDuration,
       required final Duration restDuration,
-      required final Duration longRestDuration}) = _$SettingsConfigImpl;
+      required final Duration longRestDuration,
+      final bool automaticallyStartFocus,
+      final bool automaticallyStartRest}) = _$SettingsConfigImpl;
 
   factory _SettingsConfig.fromJson(Map<String, dynamic> json) =
       _$SettingsConfigImpl.fromJson;
@@ -193,6 +234,10 @@ abstract class _SettingsConfig implements SettingsConfig {
   Duration get restDuration;
   @override
   Duration get longRestDuration;
+  @override
+  bool get automaticallyStartFocus;
+  @override
+  bool get automaticallyStartRest;
   @override
   @JsonKey(ignore: true)
   _$$SettingsConfigImplCopyWith<_$SettingsConfigImpl> get copyWith =>

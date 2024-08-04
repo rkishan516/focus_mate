@@ -7,7 +7,7 @@ part of 'page_notifier.dart';
 // **************************************************************************
 
 String _$splashPageNotifierHash() =>
-    r'5e9b4a574437b50aed9e9d2d5924944e2b6a626c';
+    r'18060cfab59611116716bf60e22eff3088644e0d';
 
 /// See also [SplashPageNotifier].
 @ProviderFor(SplashPageNotifier)

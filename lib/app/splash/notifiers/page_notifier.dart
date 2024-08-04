@@ -1,5 +1,4 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:supercharged/supercharged.dart';
 import 'package:focus_mate/app/routes/notifiers/app_router.dart';
 import 'package:focus_mate/app/routes/notifiers/app_routes.dart';
 
@@ -13,8 +12,6 @@ class SplashPageNotifier extends _$SplashPageNotifier {
   }
 
   Future<void> runStartUpLogic() async {
-    await 3.seconds.delay;
-
     ref.read(navigatorProvider).goNamed(HomePageRoute.name);
   }
 }

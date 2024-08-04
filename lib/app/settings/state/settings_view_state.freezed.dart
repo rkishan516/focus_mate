@@ -19,6 +19,8 @@ mixin _$SettingsViewState {
   Duration get focusDuration => throw _privateConstructorUsedError;
   Duration get restDuration => throw _privateConstructorUsedError;
   Duration get longRestDuration => throw _privateConstructorUsedError;
+  bool get automaticallyStartFocus => throw _privateConstructorUsedError;
+  bool get automaticallyStartRest => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsViewStateCopyWith<SettingsViewState> get copyWith =>
@@ -34,7 +36,9 @@ abstract class $SettingsViewStateCopyWith<$Res> {
   $Res call(
       {Duration focusDuration,
       Duration restDuration,
-      Duration longRestDuration});
+      Duration longRestDuration,
+      bool automaticallyStartFocus,
+      bool automaticallyStartRest});
 }
 
 /// @nodoc
@@ -53,6 +57,8 @@ class _$SettingsViewStateCopyWithImpl<$Res, $Val extends SettingsViewState>
     Object? focusDuration = null,
     Object? restDuration = null,
     Object? longRestDuration = null,
+    Object? automaticallyStartFocus = null,
+    Object? automaticallyStartRest = null,
   }) {
     return _then(_value.copyWith(
       focusDuration: null == focusDuration
@@ -67,6 +73,14 @@ class _$SettingsViewStateCopyWithImpl<$Res, $Val extends SettingsViewState>
           ? _value.longRestDuration
           : longRestDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      automaticallyStartFocus: null == automaticallyStartFocus
+          ? _value.automaticallyStartFocus
+          : automaticallyStartFocus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      automaticallyStartRest: null == automaticallyStartRest
+          ? _value.automaticallyStartRest
+          : automaticallyStartRest // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -82,7 +96,9 @@ abstract class _$$SettingsViewStateImplCopyWith<$Res>
   $Res call(
       {Duration focusDuration,
       Duration restDuration,
-      Duration longRestDuration});
+      Duration longRestDuration,
+      bool automaticallyStartFocus,
+      bool automaticallyStartRest});
 }
 
 /// @nodoc
@@ -99,6 +115,8 @@ class __$$SettingsViewStateImplCopyWithImpl<$Res>
     Object? focusDuration = null,
     Object? restDuration = null,
     Object? longRestDuration = null,
+    Object? automaticallyStartFocus = null,
+    Object? automaticallyStartRest = null,
   }) {
     return _then(_$SettingsViewStateImpl(
       focusDuration: null == focusDuration
@@ -113,6 +131,14 @@ class __$$SettingsViewStateImplCopyWithImpl<$Res>
           ? _value.longRestDuration
           : longRestDuration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      automaticallyStartFocus: null == automaticallyStartFocus
+          ? _value.automaticallyStartFocus
+          : automaticallyStartFocus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      automaticallyStartRest: null == automaticallyStartRest
+          ? _value.automaticallyStartRest
+          : automaticallyStartRest // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -123,7 +149,9 @@ class _$SettingsViewStateImpl implements _SettingsViewState {
   const _$SettingsViewStateImpl(
       {required this.focusDuration,
       required this.restDuration,
-      required this.longRestDuration});
+      required this.longRestDuration,
+      this.automaticallyStartFocus = false,
+      this.automaticallyStartRest = false});
 
   @override
   final Duration focusDuration;
@@ -131,10 +159,16 @@ class _$SettingsViewStateImpl implements _SettingsViewState {
   final Duration restDuration;
   @override
   final Duration longRestDuration;
+  @override
+  @JsonKey()
+  final bool automaticallyStartFocus;
+  @override
+  @JsonKey()
+  final bool automaticallyStartRest;
 
   @override
   String toString() {
-    return 'SettingsViewState(focusDuration: $focusDuration, restDuration: $restDuration, longRestDuration: $longRestDuration)';
+    return 'SettingsViewState(focusDuration: $focusDuration, restDuration: $restDuration, longRestDuration: $longRestDuration, automaticallyStartFocus: $automaticallyStartFocus, automaticallyStartRest: $automaticallyStartRest)';
   }
 
   @override
@@ -147,12 +181,17 @@ class _$SettingsViewStateImpl implements _SettingsViewState {
             (identical(other.restDuration, restDuration) ||
                 other.restDuration == restDuration) &&
             (identical(other.longRestDuration, longRestDuration) ||
-                other.longRestDuration == longRestDuration));
+                other.longRestDuration == longRestDuration) &&
+            (identical(
+                    other.automaticallyStartFocus, automaticallyStartFocus) ||
+                other.automaticallyStartFocus == automaticallyStartFocus) &&
+            (identical(other.automaticallyStartRest, automaticallyStartRest) ||
+                other.automaticallyStartRest == automaticallyStartRest));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, focusDuration, restDuration, longRestDuration);
+  int get hashCode => Object.hash(runtimeType, focusDuration, restDuration,
+      longRestDuration, automaticallyStartFocus, automaticallyStartRest);
 
   @JsonKey(ignore: true)
   @override
@@ -166,7 +205,9 @@ abstract class _SettingsViewState implements SettingsViewState {
   const factory _SettingsViewState(
       {required final Duration focusDuration,
       required final Duration restDuration,
-      required final Duration longRestDuration}) = _$SettingsViewStateImpl;
+      required final Duration longRestDuration,
+      final bool automaticallyStartFocus,
+      final bool automaticallyStartRest}) = _$SettingsViewStateImpl;
 
   @override
   Duration get focusDuration;
@@ -174,6 +215,10 @@ abstract class _SettingsViewState implements SettingsViewState {
   Duration get restDuration;
   @override
   Duration get longRestDuration;
+  @override
+  bool get automaticallyStartFocus;
+  @override
+  bool get automaticallyStartRest;
   @override
   @JsonKey(ignore: true)
   _$$SettingsViewStateImplCopyWith<_$SettingsViewStateImpl> get copyWith =>

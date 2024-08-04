@@ -17,12 +17,16 @@ class SettingsNotifier extends _$SettingsNotifier {
           focusDuration: 25.minutes,
           restDuration: 5.minutes,
           longRestDuration: 30.minutes,
+          automaticallyStartFocus: false,
+          automaticallyStartRest: false,
         );
 
     return SettingsViewState(
       focusDuration: config.focusDuration,
       restDuration: config.restDuration,
       longRestDuration: config.longRestDuration,
+      automaticallyStartFocus: config.automaticallyStartFocus,
+      automaticallyStartRest: config.automaticallyStartRest,
     );
   }
 
@@ -31,6 +35,8 @@ class SettingsNotifier extends _$SettingsNotifier {
       focusDuration: newState.focusDuration,
       restDuration: newState.restDuration,
       longRestDuration: newState.longRestDuration,
+      automaticallyStartFocus: newState.automaticallyStartFocus,
+      automaticallyStartRest: newState.automaticallyStartRest,
     );
     ref.read(settingsRepositoryProvider).setConfig(updatedConfig);
   }
@@ -45,5 +51,13 @@ class SettingsNotifier extends _$SettingsNotifier {
 
   void updateLongRestDuration(Duration duration) {
     state = state.copyWith(longRestDuration: duration);
+  }
+
+  void updateAutomaticallyStartFocus(bool value) {
+    state = state.copyWith(automaticallyStartFocus: value);
+  }
+
+  void updateAutomaticallyStartRest(bool value) {
+    state = state.copyWith(automaticallyStartRest: value);
   }
 }

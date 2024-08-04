@@ -9,6 +9,8 @@ class SettingsConfig with _$SettingsConfig {
     required Duration focusDuration,
     required Duration restDuration,
     required Duration longRestDuration,
+    @Default(false) bool automaticallyStartFocus,
+    @Default(false) bool automaticallyStartRest,
   }) = _SettingsConfig;
 
   factory SettingsConfig.fromJson(Map<String, dynamic> json) =>
