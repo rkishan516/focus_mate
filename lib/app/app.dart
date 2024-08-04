@@ -1,6 +1,6 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:focus_mate/app/theme/default.dart';
 import 'package:go_router/go_router.dart';
 import 'package:focus_mate/app/common/notifiers/theme_mode_notifier.dart';
 import 'package:focus_mate/app/routes/notifiers/app_router.dart';
@@ -13,14 +13,8 @@ class MainApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      theme: FlexThemeData.light(
-        scheme: FlexScheme.blueM3,
-        useMaterial3: true,
-      ),
-      darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.blueM3,
-        useMaterial3: true,
-      ),
+      theme: DefaultTheme.light,
+      darkTheme: DefaultTheme.dark,
       debugShowCheckedModeBanner: false,
       themeMode: ref.watch(themeModeNotifierProvider),
       routerConfig: ref.watch(navigatorProvider),
