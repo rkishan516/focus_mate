@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,15 @@ class HomePage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            exit(0);
+          },
+          child: const Icon(
+            Icons.cancel,
+            color: Colors.white54,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {
