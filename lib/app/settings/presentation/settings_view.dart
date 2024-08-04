@@ -30,12 +30,6 @@ class SettingsView extends ConsumerWidget {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: [
-                    SettingToggleCard(
-                      title: 'Automatically Start Focus',
-                      enabled: state.automaticallyStartFocus,
-                      onChanged: notifier.updateAutomaticallyStartFocus,
-                    ),
-                    const SizedBox(height: 8),
                     SettingDurationCard(
                       duration: state.focusDuration,
                       icon: '🧘‍♂️',
@@ -43,11 +37,21 @@ class SettingsView extends ConsumerWidget {
                       onDurationChanged: notifier.updateFocusDuration,
                     ),
                     const SizedBox(height: 8),
+                    const _SettingsDivider(),
+                    const SizedBox(height: 8),
+                    SettingToggleCard(
+                      title: 'Automatically Start Focus',
+                      enabled: state.automaticallyStartFocus,
+                      onChanged: notifier.updateAutomaticallyStartFocus,
+                    ),
+                    const SizedBox(height: 8),
                     SettingToggleCard(
                       title: 'Automatically Start Rest',
                       enabled: state.automaticallyStartRest,
                       onChanged: notifier.updateAutomaticallyStartRest,
                     ),
+                    const SizedBox(height: 8),
+                    const _SettingsDivider(),
                     const SizedBox(height: 8),
                     SettingDurationCard(
                       duration: state.restDuration,
@@ -73,6 +77,19 @@ class SettingsView extends ConsumerWidget {
   }
 }
 
+class _SettingsDivider extends StatelessWidget {
+  const _SettingsDivider();
+
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      color: Theme.of(context).dividerColor,
+      indent: 15,
+      endIndent: 15,
+    );
+  }
+}
+
 class SettingDurationCard extends StatelessWidget {
   const SettingDurationCard({
     super.key,
@@ -92,7 +109,6 @@ class SettingDurationCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      tileColor: Theme.of(context).colorScheme.secondary,
       onTap: () async {
         final updatedDuration = await showDurationPicker(
           context: context,
@@ -101,16 +117,13 @@ class SettingDurationCard extends StatelessWidget {
         if (updatedDuration == null) return;
         onDurationChanged?.call(updatedDuration);
       },
-      leading: CircleAvatar(
-        backgroundColor: Theme.of(context).colorScheme.onSecondary,
-        child: Text(
-          icon,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-      ),
       title: Text(
+        icon,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+      leading: Text(
         title,
-        style: Theme.of(context).textTheme.titleMedium,
+        style: Theme.of(context).textTheme.titleSmall,
       ),
       trailing: Text(
         '${duration.inMinutes.toString().padLeft(2, '0')}:${(duration.inSeconds.remainder(60).toString().padLeft(2, '0'))}',
@@ -134,15 +147,15 @@ class SettingToggleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SwitchListTile.adaptive(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 15),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      tileColor: Theme.of(context).colorScheme.secondary,
       onChanged: onChanged,
       value: enabled,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.titleMedium,
+        style: Theme.of(context).textTheme.titleSmall,
       ),
     );
   }
