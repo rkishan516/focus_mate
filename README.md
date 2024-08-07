@@ -4,11 +4,18 @@ FocusMate is a Flutter desktop application designed to help you focus on your wo
 
 ### Features✨
 
-* Set a timer for your work sessions to improve concentration and productivity.
-* Organize and prioritize your tasks to keep track of what needs to be done.
-* Block distracting websites and applications during focus sessions.
-* Get detailed statistics and insights on your productivity patterns.
+* **Pomodoro Timer**: Set a timer for your work sessions to improve concentration and productivity.
+* **Distraction Blocker**: Block distracting websites and applications during focus sessions.
+* **Productivity Insights**: Get detailed statistics and insights on your productivity patterns.
+* **Custom Work Sessions**: Tailor your work sessions to fit your schedule and preferences.
+* **Break Reminders**: Receive notifications to take breaks and avoid burnout.
 
-### Contributing 👨
+### Usage📖
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue to improve this app.
+* **Start a Session**: Choose the duration and start your focus session.
+* **Block Distractions**: Enable website and app blocking to minimize interruptions.
+* **Review Insights**: Check your productivity statistics and analyze your work patterns.
+
+### Contributing 👨‍💻
+
+We welcome contributions to improve FocusMate! If you have suggestions, find a bug, or want to add a new feature, feel free to submit a pull request or open an issue.
