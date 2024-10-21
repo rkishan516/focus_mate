@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:focus_mate/app/common/services/local_notification_service.dart';
 import 'package:focus_mate/app/pigeon/popover.dart';
 import 'package:focus_mate/app/settings/notifiers/settings_view_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -98,6 +99,20 @@ class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
     if (autoStartTimer) {
       startTimer();
     }
+    ref.read(localNotificationServiceProvider).showNotification(
+          title: switch (state.durationType) {
+            DurationType.focus => 'Focus Time',
+            DurationType.rest => 'Short Break',
+            DurationType.longRest => 'Long Break',
+          },
+          body: switch (state.durationType) {
+            DurationType.focus =>
+              'Time to focus! Stay productive and avoid distractions.',
+            DurationType.rest =>
+              'Take a short break. Stretch, breathe, and recharge.',
+            DurationType.longRest => 'Enjoy a longer break. You\'ve earned it!',
+          },
+        );
   }
 
   void stopTimer() {
