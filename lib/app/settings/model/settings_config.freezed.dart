@@ -26,8 +26,12 @@ mixin _$SettingsConfig {
   bool get automaticallyStartFocus => throw _privateConstructorUsedError;
   bool get automaticallyStartRest => throw _privateConstructorUsedError;
 
+  /// Serializes this SettingsConfig to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SettingsConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SettingsConfigCopyWith<SettingsConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$SettingsConfigCopyWithImpl<$Res, $Val extends SettingsConfig>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SettingsConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$SettingsConfigImplCopyWithImpl<$Res>
       _$SettingsConfigImpl _value, $Res Function(_$SettingsConfigImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SettingsConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -197,12 +205,14 @@ class _$SettingsConfigImpl implements _SettingsConfig {
                 other.automaticallyStartRest == automaticallyStartRest));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, focusDuration, restDuration,
       longRestDuration, automaticallyStartFocus, automaticallyStartRest);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SettingsConfigImplCopyWith<_$SettingsConfigImpl> get copyWith =>
@@ -238,8 +248,11 @@ abstract class _SettingsConfig implements SettingsConfig {
   bool get automaticallyStartFocus;
   @override
   bool get automaticallyStartRest;
+
+  /// Create a copy of SettingsConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SettingsConfigImplCopyWith<_$SettingsConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

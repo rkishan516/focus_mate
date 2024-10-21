@@ -10,7 +10,7 @@ part 'settings_view_notifier.g.dart';
 class SettingsNotifier extends _$SettingsNotifier {
   @override
   SettingsViewState build() {
-    ref.listenSelf(onStateChange);
+    listenSelf(onStateChange);
 
     SettingsConfig config = ref.read(settingsRepositoryProvider).getConfig() ??
         SettingsConfig(

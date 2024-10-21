@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MenuBarViewState {
   Duration get duration => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MenuBarViewState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MenuBarViewStateCopyWith<MenuBarViewState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$MenuBarViewStateCopyWithImpl<$Res, $Val extends MenuBarViewState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MenuBarViewState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -75,6 +79,8 @@ class __$$MenuBarViewStateImplCopyWithImpl<$Res>
       $Res Function(_$MenuBarViewStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MenuBarViewState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,7 +120,9 @@ class _$MenuBarViewStateImpl implements _MenuBarViewState {
   @override
   int get hashCode => Object.hash(runtimeType, duration);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MenuBarViewState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MenuBarViewStateImplCopyWith<_$MenuBarViewStateImpl> get copyWith =>
@@ -128,8 +136,11 @@ abstract class _MenuBarViewState implements MenuBarViewState {
 
   @override
   Duration get duration;
+
+  /// Create a copy of MenuBarViewState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MenuBarViewStateImplCopyWith<_$MenuBarViewStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

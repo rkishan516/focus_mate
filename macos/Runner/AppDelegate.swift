@@ -1,7 +1,7 @@
 import Cocoa
 import FlutterMacOS
 
-@NSApplicationMain
+@main
 class AppDelegate: FlutterAppDelegate {
     var flutterEngine = FlutterEngine(name: "menuBarIcon",project: nil)
     var statusBar: StatusBarController?

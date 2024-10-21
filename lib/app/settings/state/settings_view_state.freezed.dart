@@ -22,7 +22,9 @@ mixin _$SettingsViewState {
   bool get automaticallyStartFocus => throw _privateConstructorUsedError;
   bool get automaticallyStartRest => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsViewState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SettingsViewStateCopyWith<SettingsViewState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +53,8 @@ class _$SettingsViewStateCopyWithImpl<$Res, $Val extends SettingsViewState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SettingsViewState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -109,6 +113,8 @@ class __$$SettingsViewStateImplCopyWithImpl<$Res>
       $Res Function(_$SettingsViewStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SettingsViewState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -193,7 +199,9 @@ class _$SettingsViewStateImpl implements _SettingsViewState {
   int get hashCode => Object.hash(runtimeType, focusDuration, restDuration,
       longRestDuration, automaticallyStartFocus, automaticallyStartRest);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SettingsViewState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SettingsViewStateImplCopyWith<_$SettingsViewStateImpl> get copyWith =>
@@ -219,8 +227,11 @@ abstract class _SettingsViewState implements SettingsViewState {
   bool get automaticallyStartFocus;
   @override
   bool get automaticallyStartRest;
+
+  /// Create a copy of SettingsViewState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SettingsViewStateImplCopyWith<_$SettingsViewStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

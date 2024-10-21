@@ -20,7 +20,7 @@ class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
   @override
   HomePageState build() {
     MenuBarActions.setUp(this);
-    ref.listenSelf((prev, next) {
+    listenSelf((prev, next) {
       _menuBarStateChannel.send(next.runningDuration.inSeconds);
     });
     ref.onDispose(() {
@@ -42,7 +42,7 @@ class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
     );
   }
 
-  Duration maxDuration() {
+  Duration get maxDuration {
     return switch (state.durationType) {
       DurationType.focus => ref.read(settingsNotifierProvider).focusDuration,
       DurationType.rest => ref.read(settingsNotifierProvider).restDuration,
@@ -59,8 +59,8 @@ class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
         _timerOnComplete();
         return;
       }
-      if (state.runningDuration > maxDuration()) {
-        state = state.copyWith(runningDuration: maxDuration());
+      if (state.runningDuration > maxDuration) {
+        state = state.copyWith(runningDuration: maxDuration);
       }
       state = state.copyWith(
         runningDuration: state.runningDuration - 1.seconds,
