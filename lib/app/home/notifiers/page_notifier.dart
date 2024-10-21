@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:focus_mate/app/common/services/local_notification_service.dart';
+import 'package:focus_mate/app/home/repository/stats_repository.dart';
 import 'package:focus_mate/app/pigeon/popover.dart';
 import 'package:focus_mate/app/settings/notifiers/settings_view_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -73,6 +74,8 @@ class HomePageNotifier extends _$HomePageNotifier implements MenuBarActions {
   void _timerOnComplete() {
     _timer?.cancel();
     final settings = ref.read(settingsNotifierProvider);
+
+    ref.read(statsRepositoryProvider).addDurationType(type: state.durationType);
 
     state = state.copyWith(
       running: false,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:focus_mate/app/settings/presentation/settings_view.dart';
+import 'package:focus_mate/app/stats/presentation/graphs_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:focus_mate/app/developer_menu/presentation/page.dart';
 import 'package:focus_mate/app/home/presentation/page.dart';
@@ -14,6 +15,10 @@ part 'app_router.g.dart';
     TypedGoRoute<SettingsPageRoute>(
       path: SettingsPageRoute.path,
       name: SettingsPageRoute.name,
+    ),
+    TypedGoRoute<StatsPageRoute>(
+      path: StatsPageRoute.path,
+      name: StatsPageRoute.name,
     ),
     // Other routes nested under the home route
   ],
@@ -35,6 +40,15 @@ class SettingsPageRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const SettingsView();
+}
+
+class StatsPageRoute extends GoRouteData {
+  static const path = 'stats';
+  static const name = 'stats';
+  const StatsPageRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const GraphsView();
 }
 
 @TypedGoRoute<SplashPageRoute>(

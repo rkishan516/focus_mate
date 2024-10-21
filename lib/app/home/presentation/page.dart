@@ -12,6 +12,7 @@ import 'package:supercharged/supercharged.dart';
 
 part 'theme_switcher.dart';
 part 'reset_timer.dart';
+part 'popup_menu.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -35,12 +36,7 @@ class HomePage extends ConsumerWidget {
         actions: [
           _ResetTimerButton(),
           const _ThemeSwitcher(),
-          IconButton(
-            onPressed: () {
-              const SettingsPageRoute().go(context);
-            },
-            icon: const Icon(Icons.settings),
-          ),
+          _PopupMenu(),
           const SizedBox(width: 15),
         ],
       ),
