@@ -11,7 +11,6 @@ class GraphsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(graphsNotifierProvider);
-    final notifier = ref.watch(graphsNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(

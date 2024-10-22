@@ -1,4 +1,3 @@
-import 'package:focus_mate/app/home/state/page_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'graphs_view_state.freezed.dart';
